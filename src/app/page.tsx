@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { trpc } from "./trpc";
 import {
@@ -8,6 +7,12 @@ import {
   PlusCircle,
   ListTodo,
 } from "lucide-react";
+
+interface Todo {
+  id: string;
+  title: string;
+  completed: boolean;
+}
 
 export default function TodoPage() {
   const [title, setTitle] = useState("");
@@ -50,11 +55,10 @@ export default function TodoPage() {
             <h1 className="text-3xl font-bold tracking-tight">Task Manager</h1>
           </div>
           <div className="text-neutral-400">
-            {todos.filter((todo) => !todo.completed).length} Pending
+            {todos.filter((todo: Todo) => !todo.completed).length} Pending
           </div>
         </div>
 
-        {/* Input Section */}
         <form
           onSubmit={handleSubmit}
           className="p-6 border-b border-neutral-200 bg-neutral-100"
@@ -76,7 +80,6 @@ export default function TodoPage() {
           </div>
         </form>
 
-        {/* Todo List */}
         <div className="divide-y divide-neutral-200">
           {isLoading ? (
             <div className="text-center py-8 text-neutral-500 animate-pulse">
@@ -87,7 +90,7 @@ export default function TodoPage() {
               No tasks. Start by adding a new one!
             </div>
           ) : (
-            todos.map((todo) => (
+            todos.map((todo: Todo) => (
               <div
                 key={todo.id}
                 className="group flex items-center justify-between p-4 hover:bg-neutral-50 transition-colors"
@@ -135,11 +138,11 @@ export default function TodoPage() {
           )}
         </div>
 
-        {/* Footer */}
         {todos.length > 0 && (
           <div className="p-4 text-center text-neutral-500 bg-neutral-100 border-t border-neutral-200">
             <span className="text-sm">
-              {todos.filter((todo) => !todo.completed).length} tasks remaining
+              {todos.filter((todo: Todo) => !todo.completed).length} tasks
+              remaining
             </span>
           </div>
         )}
