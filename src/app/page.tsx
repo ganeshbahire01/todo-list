@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { trpc } from "./trpc";
+import { trpc } from "./server/trpc";
 import {
   CheckCircle2,
   Circle,
